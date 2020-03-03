@@ -1,8 +1,16 @@
 $(function () {
+    $(window).on('resize', function(){
+        console.log("kek");
+        camera.aspect = renderer.domElement.clientWidth / renderer.domElement.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(renderer.domElement.clientWidth, renderer.domElement.clientHeight);
+    });
+
     let scene = new THREE.Scene();
     let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     let renderer = new THREE.WebGLRenderer();
 
+    //TODO: Structure dimension based off window length and width
     function createHanoiStructure() {
         let material;
         let board_geom = new THREE.BoxGeometry(6, 0.5, 1);
@@ -66,6 +74,7 @@ $(function () {
 
         createHanoiStructure();
         createRing();
+
         camera.position.z = 5;
         camera.position.y = 1;
         const light = new THREE.PointLight(0xffffff, 5, 100);
@@ -75,9 +84,6 @@ $(function () {
         animate();
     }
 
-
     setup();
-
-
 });
 	
